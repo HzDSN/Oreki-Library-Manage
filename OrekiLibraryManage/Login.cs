@@ -47,17 +47,19 @@ namespace OrekiLibraryManage
                 {
                     group = reader[0];
                 }
+                if ((string)group == "Admin")
+                {
+                    Main main = new Main();
+                    main.Show();
+                    this.Hide();
+                }
             }
             catch (Exception)
             {
                 MessageBox.Show("登录失败");
+                return;
             }
-            if ((string)group == "Admin")
-            {
-                Main main = new Main();
-                main.Show();
-                this.Hide();
-            }
+            
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)

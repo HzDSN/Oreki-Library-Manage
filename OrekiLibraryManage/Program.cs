@@ -45,5 +45,13 @@ namespace OrekiLibraryManage
             if (connection.State == ConnectionState.Open) connection.Close();
             connection.Open();
         }
+
+        public static void chkCon()
+        {
+            if (connection.State==ConnectionState.Closed)
+            {
+                connection.Open();
+            }
+        }
     }
 }
