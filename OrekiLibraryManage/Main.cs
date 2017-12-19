@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using OrekiLibraryManage.MDI;
 
 namespace OrekiLibraryManage
 {
@@ -15,6 +16,23 @@ namespace OrekiLibraryManage
         public Main()
         {
             InitializeComponent();
+        }
+
+        private void Main_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Main_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void 图书借阅ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Borrow borrow = new Borrow();
+            borrow.MdiParent = this;
+            borrow.Show();
         }
     }
 }

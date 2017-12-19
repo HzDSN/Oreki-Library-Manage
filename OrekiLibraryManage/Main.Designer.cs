@@ -54,6 +54,7 @@
             this.图书借阅ToolStripMenuItem.Name = "图书借阅ToolStripMenuItem";
             this.图书借阅ToolStripMenuItem.Size = new System.Drawing.Size(71, 20);
             this.图书借阅ToolStripMenuItem.Text = "图书借阅";
+            this.图书借阅ToolStripMenuItem.Click += new System.EventHandler(this.图书借阅ToolStripMenuItem_Click);
             // 
             // 用户管理ToolStripMenuItem
             // 
@@ -84,6 +85,8 @@
             this.Name = "Main";
             this.Text = "欧乐可图书馆管理系统";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Main_FormClosed);
+            this.Load += new System.EventHandler(this.Main_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);

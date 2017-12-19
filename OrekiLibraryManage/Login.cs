@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -33,18 +34,43 @@ namespace OrekiLibraryManage
 
         private void button1_Click(object sender, EventArgs e)
         {
-            MySqlConnection connection = new MySqlConnection(Oreki.conStr);
-            if (connection.State == ConnectionState.Open) connection.Close();
-            connection.Open();
-            string commandText = $"select stuff_group from teamz_stuff where stuff_id='{textBox1.Text}' and stuff_password='{textBox2.Text}'";
-            MySqlCommand command = new MySqlCommand(commandText,connection);
-            MySqlDataReader reader = command.ExecuteReader();
+            Oreki.sqlCon();
+            string commandText =
+                $"select stuff_group from teamz_stuff where stuff_id='{textBox1.Text}' and stuff_password='{textBox2.Text}'";
+            MySqlCommand command = new MySqlCommand(commandText, Oreki.connection);
             object group = new object();
-            while (reader.Read())
+            try
             {
-                group = reader[0];
+                MySqlDataReader reader = command.ExecuteReader();
+                group = new object();
+                while (reader.Read())
+                {
+                    group = reader[0];
+                }
             }
-            MessageBox.Show((string)group);
+            catch (Exception)
+            {
+                MessageBox.Show("登录失败");
+            }
+            if ((string)group == "Admin")
+            {
+                Main main = new Main();
+                main.Show();
+                this.Hide();
+            }
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == Convert.ToChar(System.Windows.Forms.Keys.Enter))
+            {
+                textBox2.Focus();
+            }
         }
     }
 }

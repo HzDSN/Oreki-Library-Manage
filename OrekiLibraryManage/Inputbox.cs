@@ -1,4 +1,5 @@
 ﻿using System;
+using System.CodeDom.Compiler;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -23,12 +24,15 @@ namespace OrekiLibraryManage
             if (e.KeyChar == Convert.ToChar(System.Windows.Forms.Keys.Enter))
             {
                 button1_Click(sender, e);
+                
             }
+
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-
+            Oreki.temp = textBox1.Text;
+            this.Close();
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
