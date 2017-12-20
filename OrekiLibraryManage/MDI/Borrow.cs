@@ -130,7 +130,7 @@ namespace OrekiLibraryManage.MDI
                 MessageBox.Show("参数错误");
                 return;
             }
-            if ((int)borrowed > (int)maxborrow)
+            if ((int)borrowed >= (int)maxborrow)
             {
                 MessageBox.Show("超过最大借阅量");
             }
@@ -152,8 +152,33 @@ namespace OrekiLibraryManage.MDI
                 MessageBox.Show("无此书");
                 return;
             }
-
-
+            string commandText4 = $"select book_name from teamz_books where book_barcode='{textBox1.Text}'";
+            MySqlCommand command4 = new MySqlCommand(commandText4, connection);
+            object owner = new object();
+            try
+            {
+                MySqlDataReader reader = command4.ExecuteReader();
+                owner = new object();
+                while (reader.Read())
+                {
+                    owner = reader[0];
+                }
+                reader.Close();
+            }
+            catch (InvalidCastException)
+            {
+                MessageBox.Show("参数错误");
+                return;
+            }
+            if ((string) owner != "0")
+            {
+                listBox1.Items.Add($"{DateTime.Now.ToLongTimeString()}：{Oreki.temp}借出{(string) bookname}失败 原因：已被借出");
+                return;
+            }
+            string commandText5= $"update teamz_users SET user_borrowed=user_borrowed+1 where user_barcode='{Oreki.temp}';update teamz_books set book_owner='{Oreki.temp}';insert into teamz_records values ('{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}','{Oreki.temp}','borrow','{textBox1.Text}')";
+            MySqlCommand command5=new MySqlCommand(commandText5,connection);
+            command5.ExecuteNonQuery();
+            listBox1.Items.Add($"{DateTime.Now.ToLongTimeString()}：{Oreki.temp}借出{(string) bookname}成功");
         }
 
         void returnBook()
