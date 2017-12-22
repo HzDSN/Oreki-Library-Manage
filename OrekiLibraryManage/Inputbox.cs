@@ -21,7 +21,7 @@ namespace OrekiLibraryManage
 
         private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (e.KeyChar == Convert.ToChar(System.Windows.Forms.Keys.Enter))
+            if (e.KeyChar == Convert.ToChar(Keys.Enter))
             {
                 button1_Click(sender, e);
                 
@@ -32,12 +32,24 @@ namespace OrekiLibraryManage
         private void button1_Click(object sender, EventArgs e)
         {
             Oreki.temp = textBox1.Text;
+            Oreki.okCancel = 1;
             this.Close();
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void Inputbox_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Oreki.okCancel = 0;
+            this.Close();
         }
     }
 }

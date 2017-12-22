@@ -61,6 +61,7 @@
             this.用户管理ToolStripMenuItem.Name = "用户管理ToolStripMenuItem";
             this.用户管理ToolStripMenuItem.Size = new System.Drawing.Size(71, 20);
             this.用户管理ToolStripMenuItem.Text = "用户管理";
+            this.用户管理ToolStripMenuItem.Click += new System.EventHandler(this.用户管理ToolStripMenuItem_Click);
             // 
             // 图书管理ToolStripMenuItem
             // 

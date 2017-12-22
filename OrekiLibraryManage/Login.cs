@@ -35,22 +35,22 @@ namespace OrekiLibraryManage
         private void button1_Click(object sender, EventArgs e)
         {
             Oreki.sqlCon();
-            string commandText =
+            var commandText =
                 $"select stuff_group from teamz_stuff where stuff_id='{textBox1.Text}' and stuff_password='{textBox2.Text}'";
-            MySqlCommand command = new MySqlCommand(commandText, Oreki.connection);
-            object group = new object();
+            var command = new MySqlCommand(commandText, Oreki.connection);
+            var group = new object();
             try
             {
-                MySqlDataReader reader = command.ExecuteReader();
+                var reader = command.ExecuteReader();
                 group = new object();
                 while (reader.Read())
                 {
                     group = reader[0];
                 }
+                Oreki.@group = (string) group;
                 if ((string)group == "Admin")
                 {
-                    Main main = new Main();
-                    main.Show();
+                    Oreki.Main.Show();
                     this.Hide();
                 }
             }
@@ -59,7 +59,6 @@ namespace OrekiLibraryManage
                 MessageBox.Show("登录失败");
                 return;
             }
-            
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
