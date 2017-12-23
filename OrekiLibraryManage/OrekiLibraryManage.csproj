@@ -51,6 +51,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MDI\Book\BookManage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MDI\Book\BookManage.Designer.cs">
+      <DependentUpon>BookManage.cs</DependentUpon>
+    </Compile>
     <Compile Include="Inputbox.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -75,25 +81,25 @@
     <Compile Include="MDI\Borrow.Designer.cs">
       <DependentUpon>Borrow.cs</DependentUpon>
     </Compile>
-    <Compile Include="NewUser.cs">
+    <Compile Include="MDI\User\NewUser.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="NewUser.Designer.cs">
+    <Compile Include="MDI\User\NewUser.Designer.cs">
       <DependentUpon>NewUser.cs</DependentUpon>
     </Compile>
     <Compile Include="Oreki.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RemoveUser.cs">
+    <Compile Include="MDI\User\RemoveUser.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="RemoveUser.Designer.cs">
+    <Compile Include="MDI\User\RemoveUser.Designer.cs">
       <DependentUpon>RemoveUser.cs</DependentUpon>
     </Compile>
-    <Compile Include="User.cs">
+    <Compile Include="MDI\User\User.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="User.Designer.cs">
+    <Compile Include="MDI\User\User.Designer.cs">
       <DependentUpon>User.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Inputbox.resx">
@@ -105,10 +111,13 @@
     <EmbeddedResource Include="Main.resx">
       <DependentUpon>Main.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="MDI\Book\BookManage.resx">
+      <DependentUpon>BookManage.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MDI\Borrow.resx">
       <DependentUpon>Borrow.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="NewUser.resx">
+    <EmbeddedResource Include="MDI\User\NewUser.resx">
       <DependentUpon>NewUser.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -120,10 +129,10 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="RemoveUser.resx">
+    <EmbeddedResource Include="MDI\User\RemoveUser.resx">
       <DependentUpon>RemoveUser.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="User.resx">
+    <EmbeddedResource Include="MDI\User\User.resx">
       <DependentUpon>User.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
