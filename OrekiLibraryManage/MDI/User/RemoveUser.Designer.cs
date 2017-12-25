@@ -43,7 +43,7 @@
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(175, 20);
             this.textBox1.TabIndex = 3;
-            this.textBox1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
+            this.textBox1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBox1_KeyPress);
             // 
             // label1
             // 
@@ -62,7 +62,7 @@
             this.button1.TabIndex = 4;
             this.button1.Text = "读取";
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.button1.Click += new System.EventHandler(this.Button1_Click);
             // 
             // label2
             // 
@@ -92,7 +92,7 @@
             this.checkBox1.TabIndex = 9;
             this.checkBox1.Text = "确定销户";
             this.checkBox1.UseVisualStyleBackColor = true;
-            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.CheckBox1_CheckedChanged);
             // 
             // button2
             // 
@@ -103,7 +103,7 @@
             this.button2.TabIndex = 10;
             this.button2.Text = "销户";
             this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.button2.Click += new System.EventHandler(this.Button2_Click);
             // 
             // RemoveUser
             // 

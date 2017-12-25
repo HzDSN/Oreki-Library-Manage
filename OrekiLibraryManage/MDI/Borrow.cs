@@ -14,40 +14,40 @@ namespace OrekiLibraryManage.MDI
     public partial class Borrow : Form
     {
         #region MySQL Connection
-        public static MySqlConnection connection = new MySqlConnection(Oreki.conStr);
+        public static MySqlConnection Connection = new MySqlConnection(Oreki.ConStr);
 
-        public static void sqlCon()
+        public static void SqlCon()
         {
-            if (connection.State == ConnectionState.Open) connection.Close();
-            connection.Open();
+            if (Connection.State == ConnectionState.Open) Connection.Close();
+            Connection.Open();
         }
 
-        public static void chkCon()
+        public static void ChkCon()
         {
-            if (connection.State == ConnectionState.Closed)
+            if (Connection.State == ConnectionState.Closed)
             {
-                connection.Open();
+                Connection.Open();
             }
         }
         #endregion
 
-        private string temp;
+        private string _temp;
 
         public Borrow()
         {
             InitializeComponent();
         }
 
-        private void buttonBorrow_Click(object sender, EventArgs e)
+        private void ButtonBorrow_Click(object sender, EventArgs e)
         {
-            Oreki.showInput("条码扫描", "请扫描用户条码");
-            if (Oreki.okCancel==0)
+            Oreki.ShowInput("条码扫描", "请扫描用户条码");
+            if (Oreki.OkCancel==0)
             {
                 return;
             }
-            chkCon();
-            var commandText = $"select user_name from teamz_users where user_barcode='{Oreki.temp}'";
-            var command = new MySqlCommand(commandText, connection);
+            ChkCon();
+            var commandText = $"select user_name from teamz_users where user_barcode='{Oreki.Temp}'";
+            var command = new MySqlCommand(commandText, Connection);
             var name = new object();
             //try
             //{
@@ -58,7 +58,7 @@ namespace OrekiLibraryManage.MDI
                 name = reader[0];
             }
             reader.Close();
-            if (Oreki.temp=="0")
+            if (Oreki.Temp=="0")
             {
                 MessageBox.Show("用户不存在");
                 return;
@@ -72,8 +72,8 @@ namespace OrekiLibraryManage.MDI
                 MessageBox.Show("用户不存在");
                 return;
             }
-            label1.Text = $"用户编号：{Oreki.temp}";
-            this.temp = Oreki.temp;
+            label1.Text = $"用户编号：{Oreki.Temp}";
+            this._temp = Oreki.Temp;
             try
             {
                 label2.Text = $"姓名：{(string)name}";
@@ -82,20 +82,20 @@ namespace OrekiLibraryManage.MDI
             {
                 return;
             }
-            var commandText3 = $"select user_borrowed from teamz_users where user_barcode='{Oreki.temp}'";
-            var commandText2 = $"select user_maxborrow from teamz_users where user_barcode='{Oreki.temp}'";
-            var command3 = new MySqlCommand(commandText3, connection);
-            var command2 = new MySqlCommand(commandText2, connection);
+            var commandText3 = $"select user_borrowed from teamz_users where user_barcode='{Oreki.Temp}'";
+            var commandText2 = $"select user_maxborrow from teamz_users where user_barcode='{Oreki.Temp}'";
+            var command3 = new MySqlCommand(commandText3, Connection);
+            var command2 = new MySqlCommand(commandText2, Connection);
             var borrowed = new object();
             try
             {
-                var reade2r = command3.ExecuteReader();
+                var reade2R = command3.ExecuteReader();
                 borrowed = new object();
-                while (reade2r.Read())
+                while (reade2R.Read())
                 {
-                    borrowed = reade2r[0];
+                    borrowed = reade2R[0];
                 }
-                reade2r.Close();
+                reade2R.Close();
             }
             catch (InvalidCastException)
             {
@@ -131,7 +131,7 @@ namespace OrekiLibraryManage.MDI
 
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void Button2_Click(object sender, EventArgs e)
         {
             label1.Visible = false;
             label2.Visible = false;
@@ -142,29 +142,29 @@ namespace OrekiLibraryManage.MDI
             textBox1.Focus();
         }
 
-        private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
+        private void TextBox1_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == Convert.ToChar(Keys.Enter) && textBox1.Text != String.Empty)
             {
                 if (label4.Text == "借")
                 {
-                    borrow();
+                    BorrowBook();
                 }
                 else if (label4.Text == "还")
                 {
-                    returnBook();
+                    ReturnBook();
                 }
             }
         }
 
-        void borrow()
+        private void BorrowBook()
         {
-            Oreki.temp = this.temp;
-            chkCon();
-            var commandText = $"select user_borrowed from teamz_users where user_barcode='{Oreki.temp}'";
-            var commandText2 = $"select user_maxborrow from teamz_users where user_barcode='{Oreki.temp}'";
-            var command = new MySqlCommand(commandText, connection);
-            var command2 = new MySqlCommand(commandText2, connection);
+            Oreki.Temp = this._temp;
+            ChkCon();
+            var commandText = $"select user_borrowed from teamz_users where user_barcode='{Oreki.Temp}'";
+            var commandText2 = $"select user_maxborrow from teamz_users where user_barcode='{Oreki.Temp}'";
+            var command = new MySqlCommand(commandText, Connection);
+            var command2 = new MySqlCommand(commandText2, Connection);
             var borrowed = new object();
             try
             {
@@ -201,12 +201,12 @@ namespace OrekiLibraryManage.MDI
             }
             if ((int)borrowed >= (int)maxborrow)
             {
-                listBox1.Items.Add($"{DateTime.Now.ToLongTimeString()}：{Oreki.temp}借书失败 原因：超过最大借阅量");
+                listBox1.Items.Add($"{DateTime.Now.ToLongTimeString()}：{Oreki.Temp}借书失败 原因：超过最大借阅量");
                 textBox1.Text=String.Empty;
                 return;
             }
             var commandText3 = $"select book_name from teamz_books where book_barcode='{textBox1.Text}'";
-            var command3 = new MySqlCommand(commandText3, connection);
+            var command3 = new MySqlCommand(commandText3, Connection);
             var bookname = new object();
             {
                 var reader = command3.ExecuteReader();
@@ -228,7 +228,7 @@ namespace OrekiLibraryManage.MDI
                 return;
             }
             var commandText4 = $"select book_owner from teamz_books where book_barcode='{textBox1.Text}'";
-            var command4 = new MySqlCommand(commandText4, connection);
+            var command4 = new MySqlCommand(commandText4, Connection);
             var owner = new object();
             try
             {
@@ -248,22 +248,22 @@ namespace OrekiLibraryManage.MDI
             }
             if ((string)owner != "0")
             {
-                listBox1.Items.Add($"{DateTime.Now.ToLongTimeString()}：{Oreki.temp}借出{(string)bookname}失败 原因：已被借出");
+                listBox1.Items.Add($"{DateTime.Now.ToLongTimeString()}：{Oreki.Temp}借出{(string)bookname}失败 原因：已被借出");
                 textBox1.Text=String.Empty;
                 return;
             }
-            var commandText5 = $"update teamz_users SET user_borrowed=user_borrowed+1 where user_barcode='{Oreki.temp}';update teamz_books set book_owner='{Oreki.temp}' where book_barcode='{textBox1.Text}';insert into teamz_records values ('{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}','{Oreki.temp}','borrow','{textBox1.Text}')";
-            var command5 = new MySqlCommand(commandText5, connection);
+            var commandText5 = $"update teamz_users SET user_borrowed=user_borrowed+1 where user_barcode='{Oreki.Temp}';update teamz_books set book_owner='{Oreki.Temp}' where book_barcode='{textBox1.Text}';insert into teamz_records values ('{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}','{Oreki.Temp}','borrow','{textBox1.Text}')";
+            var command5 = new MySqlCommand(commandText5, Connection);
             command5.ExecuteNonQuery();
-            listBox1.Items.Add($"{DateTime.Now.ToLongTimeString()}：{Oreki.temp}借出{(string)bookname}成功");
+            listBox1.Items.Add($"{DateTime.Now.ToLongTimeString()}：{Oreki.Temp}借出{(string)bookname}成功");
             textBox1.Text = string.Empty;
         }
 
-        void returnBook()
+        void ReturnBook()
         {
-            chkCon();
+            ChkCon();
             var commandText3 = $"select book_name from teamz_books where book_barcode='{textBox1.Text}'";
-            var command3 = new MySqlCommand(commandText3, connection);
+            var command3 = new MySqlCommand(commandText3, Connection);
             var bookname = new object();
             {
                 var reader = command3.ExecuteReader();
@@ -285,7 +285,7 @@ namespace OrekiLibraryManage.MDI
                 return;
             }
             var commandText4 = $"select book_owner from teamz_books where book_barcode='{textBox1.Text}'";
-            var command4 = new MySqlCommand(commandText4, connection);
+            var command4 = new MySqlCommand(commandText4, Connection);
             var owner = new object();
             try
             {
@@ -309,9 +309,9 @@ namespace OrekiLibraryManage.MDI
                 textBox1.Text = String.Empty;
                 return;
             }
-            Oreki.temp = (string) owner;
-            var commandText = $"select user_borrowed from teamz_users where user_barcode='{Oreki.temp}'";
-            var command = new MySqlCommand(commandText, connection);
+            Oreki.Temp = (string) owner;
+            var commandText = $"select user_borrowed from teamz_users where user_barcode='{Oreki.Temp}'";
+            var command = new MySqlCommand(commandText, Connection);
             var borrowed = new object();
             try
             {
@@ -331,13 +331,13 @@ namespace OrekiLibraryManage.MDI
             }
             if ((int)borrowed == 0)
             {
-                MessageBox.Show($"{Oreki.temp}还书失败 原因：已借书0册");
+                MessageBox.Show($"{Oreki.Temp}还书失败 原因：已借书0册");
             }
             var commandText1 =
-                $"update teamz_users SET user_borrowed=user_borrowed-1 where user_barcode='{Oreki.temp}';update teamz_books set book_owner='0' where book_barcode='{textBox1.Text}';insert into teamz_records values ('{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}','{Oreki.temp}','return','{textBox1.Text}')";
-            var command1=new MySqlCommand(commandText1,connection);
+                $"update teamz_users SET user_borrowed=user_borrowed-1 where user_barcode='{Oreki.Temp}';update teamz_books set book_owner='0' where book_barcode='{textBox1.Text}';insert into teamz_records values ('{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}','{Oreki.Temp}','return','{textBox1.Text}')";
+            var command1=new MySqlCommand(commandText1,Connection);
             command1.ExecuteNonQuery();
-            listBox1.Items.Add($"{DateTime.Now.ToLongTimeString()}：{Oreki.temp}归还{(string)bookname}成功");
+            listBox1.Items.Add($"{DateTime.Now.ToLongTimeString()}：{Oreki.Temp}归还{(string)bookname}成功");
             textBox1.Text=String.Empty;
         }
     }

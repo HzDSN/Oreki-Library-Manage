@@ -51,6 +51,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="MDI\Book\BookAddorChange.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MDI\Book\BookAddorChange.Designer.cs">
+      <DependentUpon>BookAddorChange.cs</DependentUpon>
+    </Compile>
     <Compile Include="MDI\Book\BookManage.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -69,10 +76,10 @@
     <Compile Include="Login.Designer.cs">
       <DependentUpon>Login.cs</DependentUpon>
     </Compile>
-    <Compile Include="Main.cs">
+    <Compile Include="MDI\Main.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Main.Designer.cs">
+    <Compile Include="MDI\Main.Designer.cs">
       <DependentUpon>Main.cs</DependentUpon>
     </Compile>
     <Compile Include="MDI\Borrow.cs">
@@ -108,7 +115,10 @@
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Main.resx">
+    <EmbeddedResource Include="MDI\Book\BookAddorChange.resx">
+      <DependentUpon>BookAddorChange.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MDI\Main.resx">
       <DependentUpon>Main.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MDI\Book\BookManage.resx">

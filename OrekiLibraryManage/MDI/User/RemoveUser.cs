@@ -14,19 +14,19 @@ namespace OrekiLibraryManage
     public partial class RemoveUser : Form
     {
         #region MySQL Connection
-        public static MySqlConnection connection = new MySqlConnection(Oreki.conStr);
+        public static MySqlConnection Connection = new MySqlConnection(Oreki.ConStr);
 
-        public static void sqlCon()
+        public static void SqlCon()
         {
-            if (connection.State == ConnectionState.Open) connection.Close();
-            connection.Open();
+            if (Connection.State == ConnectionState.Open) Connection.Close();
+            Connection.Open();
         }
 
-        public static void chkCon()
+        public static void ChkCon()
         {
-            if (connection.State == ConnectionState.Closed)
+            if (Connection.State == ConnectionState.Closed)
             {
-                connection.Open();
+                Connection.Open();
             }
         }
         #endregion
@@ -36,26 +36,26 @@ namespace OrekiLibraryManage
             InitializeComponent();
         }
 
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        private void CheckBox1_CheckedChanged(object sender, EventArgs e)
         {
             button2.Enabled = checkBox1.Checked && checkBox1.Enabled;
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void Button2_Click(object sender, EventArgs e)
         {
             var commandText = $"delete from teamz_users where user_barcode={textBox1.Text}";
-            MySqlCommand command=new MySqlCommand(commandText,connection);
+            MySqlCommand command=new MySqlCommand(commandText,Connection);
             command.ExecuteNonQuery();
             MessageBox.Show("销户成功");
             this.Close();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void Button1_Click(object sender, EventArgs e)
         {
-            chkCon();
+            ChkCon();
             checkBox1.Checked = false;
             var commandText = $"select user_name from teamz_users where user_barcode='{textBox1.Text}'";
-            var command = new MySqlCommand(commandText, connection);
+            var command = new MySqlCommand(commandText, Connection);
             var name = new object();
             var reader = command.ExecuteReader();
             name = new object();
@@ -64,7 +64,7 @@ namespace OrekiLibraryManage
                 name = reader[0];
             }
             reader.Close();
-            if (Oreki.temp == "0")
+            if (Oreki.Temp == "0")
             {
                 MessageBox.Show("用户不存在");
                 return;
@@ -80,7 +80,7 @@ namespace OrekiLibraryManage
             }
             label2.Text = $"姓名：{(string) name}";
             var commandText2 = $"select user_borrowed from teamz_users where user_barcode='{textBox1.Text}'";
-            var command2 = new MySqlCommand(commandText2, connection);
+            var command2 = new MySqlCommand(commandText2, Connection);
             var borrowed = new  object();
             var reader2 = command2.ExecuteReader();
             while (reader2.Read())
@@ -99,12 +99,12 @@ namespace OrekiLibraryManage
             }
         }
 
-        private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
+        private void TextBox1_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar==Convert.ToChar(Keys.Enter))
             {
                 button1.Focus();
-                button1_Click(sender,e);
+                Button1_Click(sender,e);
             }
         }
     }

@@ -19,24 +19,24 @@ namespace OrekiLibraryManage
             InitializeComponent();
         }
 
-        private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
+        private void TextBox1_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == Convert.ToChar(Keys.Enter))
             {
-                button1_Click(sender, e);
+                Button1_Click(sender, e);
                 
             }
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void Button1_Click(object sender, EventArgs e)
         {
-            Oreki.temp = textBox1.Text;
-            Oreki.okCancel = 1;
+            Oreki.Temp = textBox1.Text;
+            Oreki.OkCancel = 1;
             this.Close();
         }
 
-        private void textBox1_TextChanged(object sender, EventArgs e)
+        private void TextBox1_TextChanged(object sender, EventArgs e)
         {
 
         }
@@ -46,9 +46,9 @@ namespace OrekiLibraryManage
 
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void Button2_Click(object sender, EventArgs e)
         {
-            Oreki.okCancel = 0;
+            Oreki.OkCancel = 0;
             this.Close();
         }
     }

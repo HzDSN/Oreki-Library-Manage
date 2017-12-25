@@ -30,16 +30,29 @@ namespace OrekiLibraryManage
 
         private void 图书借阅ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var borrow = new Borrow();
-            borrow.MdiParent = this;
+            var borrow = new Borrow
+            {
+                MdiParent = this
+            };
             borrow.Show();
         }
 
         private void 用户管理ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var user = new User();
-            user.MdiParent = this;
+            var user = new User
+            {
+                MdiParent = this
+            };
             user.Show();
+        }
+
+        private void 图书管理ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            BookManage book = new BookManage
+            {
+                MdiParent = this
+            };
+            book.Show();
         }
     }
 }

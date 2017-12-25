@@ -14,19 +14,19 @@ namespace OrekiLibraryManage
     public partial class NewUser : Form
     {
         #region MySQL Connection
-        public static MySqlConnection connection = new MySqlConnection(Oreki.conStr);
+        public static MySqlConnection Connection = new MySqlConnection(Oreki.ConStr);
 
-        public static void sqlCon()
+        public static void SqlCon()
         {
-            if (connection.State == ConnectionState.Open) connection.Close();
-            connection.Open();
+            if (Connection.State == ConnectionState.Open) Connection.Close();
+            Connection.Open();
         }
 
-        public static void chkCon()
+        public static void ChkCon()
         {
-            if (connection.State == ConnectionState.Closed)
+            if (Connection.State == ConnectionState.Closed)
             {
-                connection.Open();
+                Connection.Open();
             }
         }
         #endregion
@@ -36,7 +36,7 @@ namespace OrekiLibraryManage
             InitializeComponent();
         }
 
-        private void chkEnable()
+        private void ChkEnable()
         {
             if (textBox1.TextLength > 0 && textBox2.TextLength > 0 && textBox3.TextLength > 0)
             {
@@ -59,7 +59,7 @@ namespace OrekiLibraryManage
                 button1.Enabled = false;
             }
         }
-        private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
+        private void TextBox1_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == Convert.ToChar(Keys.Enter))
             {
@@ -67,11 +67,11 @@ namespace OrekiLibraryManage
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void Button1_Click(object sender, EventArgs e)
         {
-            chkCon();
+            ChkCon();
             var commandText = $"select user_name from teamz_users where user_barcode='{textBox1.Text}'";
-            var command = new MySqlCommand(commandText, connection);
+            var command = new MySqlCommand(commandText, Connection);
             var name = new object();
             //try
             //{
@@ -88,34 +88,34 @@ namespace OrekiLibraryManage
             }
             catch (Exception)
             {
-                addUser();
+                AddUser();
                 return;
             }
             MessageBox.Show("已存在相同编号的用户");
         }
 
-        private void addUser()
+        private void AddUser()
         {
             string commandText = $"insert into teamz_users values ('{textBox1.Text}','{textBox2.Text}','',0,{textBox3.Text})";
-            var command=new MySqlCommand(commandText,connection);
+            var command=new MySqlCommand(commandText,Connection);
             command.ExecuteNonQuery();
             MessageBox.Show("添加成功");
             this.Close();
         }
 
-        private void textBox1_TextChanged(object sender, EventArgs e)
+        private void TextBox1_TextChanged(object sender, EventArgs e)
         {
-            chkEnable();
+            ChkEnable();
         }
 
-        private void textBox2_TextChanged(object sender, EventArgs e)
+        private void TextBox2_TextChanged(object sender, EventArgs e)
         {
-            chkEnable();
+            ChkEnable();
         }
 
-        private void textBox3_TextChanged(object sender, EventArgs e)
+        private void TextBox3_TextChanged(object sender, EventArgs e)
         {
-            chkEnable();
+            ChkEnable();
         }
     }
 }

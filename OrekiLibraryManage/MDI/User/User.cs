@@ -14,19 +14,19 @@ namespace OrekiLibraryManage
     public partial class User : Form
     {
         #region MySQL Connection
-        public static MySqlConnection connection = new MySqlConnection(Oreki.conStr);
+        public static MySqlConnection Connection = new MySqlConnection(Oreki.ConStr);
 
-        public static void sqlCon()
+        public static void SqlCon()
         {
-            if (connection.State == ConnectionState.Open) connection.Close();
-            connection.Open();
+            if (Connection.State == ConnectionState.Open) Connection.Close();
+            Connection.Open();
         }
 
-        public static void chkCon()
+        public static void ChkCon()
         {
-            if (connection.State == ConnectionState.Closed)
+            if (Connection.State == ConnectionState.Closed)
             {
-                connection.Open();
+                Connection.Open();
             }
         }
         #endregion
@@ -34,23 +34,23 @@ namespace OrekiLibraryManage
         public User()
         {
             InitializeComponent();
-            if (Oreki.@group != "Admin" && Oreki.@group != "Manager")//需同时满足这两个条件，用and
+            if (Oreki.Group != "Admin" && Oreki.Group != "Manager")//需同时满足这两个条件，用and
             {
                 button2.Visible = false;
                 button3.Visible = false;
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void Button1_Click(object sender, EventArgs e)
         {
-            Oreki.showInput("条码扫描", "请扫描用户条码");
-            if (Oreki.okCancel == 0)
+            Oreki.ShowInput("条码扫描", "请扫描用户条码");
+            if (Oreki.OkCancel == 0)
             {
                 return;
             }
-            chkCon();
-            var commandText = $"select user_name from teamz_users where user_barcode='{Oreki.temp}'";
-            var command = new MySqlCommand(commandText, connection);
+            ChkCon();
+            var commandText = $"select user_name from teamz_users where user_barcode='{Oreki.Temp}'";
+            var command = new MySqlCommand(commandText, Connection);
             var name = new object();
             var reader = command.ExecuteReader();
             name = new object();
@@ -59,7 +59,7 @@ namespace OrekiLibraryManage
                 name = reader[0];
             }
             reader.Close();
-            if (Oreki.temp == "0")
+            if (Oreki.Temp == "0")
             {
                 MessageBox.Show("用户不存在");
                 return;
@@ -82,14 +82,14 @@ namespace OrekiLibraryManage
                 return;
             }
             tabControl1.Enabled = true;
-            tabRefresh();
+            TabRefresh();
         }
 
-        private void tabRefresh()
+        private void TabRefresh()
         {
-            labelYHBH.Text = $"用户编号：{Oreki.temp}";
-            var commandText = $"select user_name from teamz_users where user_barcode='{Oreki.temp}'";
-            var command = new MySqlCommand(commandText, connection);
+            labelYHBH.Text = $"用户编号：{Oreki.Temp}";
+            var commandText = $"select user_name from teamz_users where user_barcode='{Oreki.Temp}'";
+            var command = new MySqlCommand(commandText, Connection);
             var name = new object();
             var reader = command.ExecuteReader();
             name = new object();
@@ -99,8 +99,8 @@ namespace OrekiLibraryManage
             }
             labelXM.Text = $"姓名：{(string)name}";
             reader.Close();
-            var commandText2 = $"select user_borrowed from teamz_users where user_barcode='{Oreki.temp}'";
-            var command2 = new MySqlCommand(commandText2, connection);
+            var commandText2 = $"select user_borrowed from teamz_users where user_barcode='{Oreki.Temp}'";
+            var command2 = new MySqlCommand(commandText2, Connection);
             var borrowed = new object();
             var reader2 = command2.ExecuteReader();
             borrowed = new object();
@@ -110,8 +110,8 @@ namespace OrekiLibraryManage
             }
             labelCYTSS.Text = $"持有图书数：{(int)borrowed}"; ;
             reader2.Close();
-            var commandText3 = $"select user_maxborrow from teamz_users where user_barcode='{Oreki.temp}'";
-            var command3 = new MySqlCommand(commandText3, connection);
+            var commandText3 = $"select user_maxborrow from teamz_users where user_barcode='{Oreki.Temp}'";
+            var command3 = new MySqlCommand(commandText3, Connection);
             var maxborrow = new object();
             var reader3 = command3.ExecuteReader();
             maxborrow = new object();
@@ -121,8 +121,8 @@ namespace OrekiLibraryManage
             }
             labelZDKJS.Text = $"最大可借数：{(int)maxborrow}";
             reader3.Close();
-            var commandText4 = $"select * from teamz_books where book_owner='{Oreki.temp}'";
-            MySqlDataAdapter dataAdapter = new MySqlDataAdapter(commandText4, Oreki.conStr);
+            var commandText4 = $"select * from teamz_books where book_owner='{Oreki.Temp}'";
+            MySqlDataAdapter dataAdapter = new MySqlDataAdapter(commandText4, Oreki.ConStr);
             DataSet dataSet = new DataSet();
             dataAdapter.Fill(dataSet, "book_barcode");
             dataGridView1.DataSource = dataSet;
@@ -136,8 +136,8 @@ namespace OrekiLibraryManage
             dataGridView1.DataSource = dataSet;
             dataGridView1.DataMember = "book_isbn";
             dataGridView1.Columns[2].DataPropertyName = dataSet.Tables[2].Columns[2].ToString();
-            var commandText5 = $"select * from teamz_records where user_code='{Oreki.temp}'";
-            MySqlDataAdapter dataAdapter2 = new MySqlDataAdapter(commandText5, Oreki.conStr);
+            var commandText5 = $"select * from teamz_records where user_code='{Oreki.Temp}'";
+            MySqlDataAdapter dataAdapter2 = new MySqlDataAdapter(commandText5, Oreki.ConStr);
             DataSet dataSet2 = new DataSet();
             dataAdapter2.Fill(dataSet2, "book_barcode");
             dataGridView2.DataSource = dataSet2;
@@ -153,18 +153,22 @@ namespace OrekiLibraryManage
             dataGridView2.Columns[2].DataPropertyName = dataSet2.Tables[2].Columns[2].ToString();
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void Button2_Click(object sender, EventArgs e)
         {
             //Oreki.NewUser.Show();
-            NewUser newUser = new NewUser();
-            newUser.MdiParent = Oreki.Main;
+            NewUser newUser = new NewUser
+            {
+                MdiParent = Oreki.Main
+            };
             newUser.Show();
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private void Button3_Click(object sender, EventArgs e)
         {
-            RemoveUser removeUser=new RemoveUser();
-            removeUser.MdiParent = Oreki.Main;
+            RemoveUser removeUser = new RemoveUser
+            {
+                MdiParent = Oreki.Main
+            };
             removeUser.Show();
         }
     }

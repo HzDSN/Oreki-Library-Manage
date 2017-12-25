@@ -48,7 +48,7 @@
             this.buttonBorrow.TabIndex = 0;
             this.buttonBorrow.Text = "借";
             this.buttonBorrow.UseVisualStyleBackColor = true;
-            this.buttonBorrow.Click += new System.EventHandler(this.buttonBorrow_Click);
+            this.buttonBorrow.Click += new System.EventHandler(this.ButtonBorrow_Click);
             // 
             // button2
             // 
@@ -59,7 +59,7 @@
             this.button2.TabIndex = 1;
             this.button2.Text = "还";
             this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.button2.Click += new System.EventHandler(this.Button2_Click);
             // 
             // label1
             // 
@@ -105,7 +105,7 @@
             this.textBox1.Size = new System.Drawing.Size(682, 20);
             this.textBox1.TabIndex = 6;
             this.textBox1.Visible = false;
-            this.textBox1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
+            this.textBox1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBox1_KeyPress);
             // 
             // label4
             // 

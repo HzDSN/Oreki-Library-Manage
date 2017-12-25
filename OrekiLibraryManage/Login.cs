@@ -19,25 +19,25 @@ namespace OrekiLibraryManage
             InitializeComponent();
         }
 
-        private void textBox2_TextChanged(object sender, EventArgs e)
+        private void TextBox2_TextChanged(object sender, EventArgs e)
         {
 
         }
 
-        private void textBox2_KeyPress(object sender, KeyPressEventArgs e)
+        private void TextBox2_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == Convert.ToChar(System.Windows.Forms.Keys.Enter))
             {
-                button1_Click(sender, e);
+                Button1_Click(sender, e);
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void Button1_Click(object sender, EventArgs e)
         {
-            Oreki.sqlCon();
+            Oreki.SqlCon();
             var commandText =
                 $"select stuff_group from teamz_stuff where stuff_id='{textBox1.Text}' and stuff_password='{textBox2.Text}'";
-            var command = new MySqlCommand(commandText, Oreki.connection);
+            var command = new MySqlCommand(commandText, Oreki.Connection);
             var group = new object();
             try
             {
@@ -47,7 +47,7 @@ namespace OrekiLibraryManage
                 {
                     group = reader[0];
                 }
-                Oreki.@group = (string) group;
+                Oreki.Group = (string) group;
                 if ((string)group == "Admin")
                 {
                     Oreki.Main.Show();
@@ -61,12 +61,12 @@ namespace OrekiLibraryManage
             }
         }
 
-        private void textBox1_TextChanged(object sender, EventArgs e)
+        private void TextBox1_TextChanged(object sender, EventArgs e)
         {
 
         }
 
-        private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
+        private void TextBox1_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == Convert.ToChar(System.Windows.Forms.Keys.Enter))
             {
