@@ -43,9 +43,10 @@ namespace OrekiLibraryManage
 
         private void Button2_Click(object sender, EventArgs e)
         {
-            var commandText = $"delete from teamz_users where user_barcode={textBox1.Text}";
+            var commandText = $"delete from teamz_users where user_barcode='{textBox1.Text}'";
             MySqlCommand command=new MySqlCommand(commandText,Connection);
             command.ExecuteNonQuery();
+            string commandText2 = $"delete from teamz_records where user_code='{textBox1.Text}'";
             MessageBox.Show("销户成功");
             this.Close();
         }

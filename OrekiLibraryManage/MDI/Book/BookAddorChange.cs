@@ -88,15 +88,18 @@ namespace OrekiLibraryManage.MDI
         private void ChangeBook()
         {
             ChkCon();
+            string commandText =
+                $"update teamz_books set book_name='{textBox2.Text}',book_writer='{textBox3.Text}',book_press='{textBox4.Text}',book_isbn='{textBox5.Text}' where book_barcode='{textBox1.Text}'";
+            MySqlCommand command=new MySqlCommand(commandText,Connection);
+            command.ExecuteNonQuery();
+            MessageBox.Show("修改成功");
+            this.Close();
         }
 
         private void TextBox1_TextChanged(object sender, EventArgs e)
         {
             button1.Enabled = (textBox1.TextLength > 0) && (textBox2.TextLength > 0) && (textBox3.TextLength > 0) &&
                               (textBox4.TextLength > 0) && (textBox5.TextLength > 0);
-
-
-
         }
 
         private void TextBox2_TextChanged(object sender, EventArgs e)

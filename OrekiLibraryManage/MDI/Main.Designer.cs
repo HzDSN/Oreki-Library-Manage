@@ -32,7 +32,6 @@
             this.图书借阅ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.用户管理ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.图书管理ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.员工管理ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -41,8 +40,7 @@
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.图书借阅ToolStripMenuItem,
             this.用户管理ToolStripMenuItem,
-            this.图书管理ToolStripMenuItem,
-            this.员工管理ToolStripMenuItem});
+            this.图书管理ToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(689, 24);
@@ -70,12 +68,6 @@
             this.图书管理ToolStripMenuItem.Text = "图书管理";
             this.图书管理ToolStripMenuItem.Click += new System.EventHandler(this.图书管理ToolStripMenuItem_Click);
             // 
-            // 员工管理ToolStripMenuItem
-            // 
-            this.员工管理ToolStripMenuItem.Name = "员工管理ToolStripMenuItem";
-            this.员工管理ToolStripMenuItem.Size = new System.Drawing.Size(71, 20);
-            this.员工管理ToolStripMenuItem.Text = "员工管理";
-            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -102,6 +94,5 @@
         private System.Windows.Forms.ToolStripMenuItem 图书借阅ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 用户管理ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 图书管理ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 员工管理ToolStripMenuItem;
     }
 }

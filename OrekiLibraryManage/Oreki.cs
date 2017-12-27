@@ -15,6 +15,7 @@ namespace OrekiLibraryManage
             };
             inputbox.label1.Text = hint;
             inputbox.ShowDialog();
+            //return inputbox.textBox1.Text;
         }
 
         public static string Temp;
